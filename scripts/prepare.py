@@ -11,7 +11,15 @@ Usage :
 Dépendances : ffmpeg ; pip install rembg onnxruntime (masques) ; pip install faster-whisper (mots).
 Les masques prennent ~1 s par image sur un ordinateur portable : limite --duration aux passages utiles.
 """
-import argparse, os, subprocess, json, glob
+import argparse, os, subprocess, json, glob, shutil
+
+def _ff():
+    if os.environ.get('FFMPEG_PATH'): return os.environ['FFMPEG_PATH']
+    if shutil.which('ffmpeg'): return 'ffmpeg'
+    try:
+        import imageio_ffmpeg; return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception: return 'ffmpeg'
+FF = _ff()
 
 ap = argparse.ArgumentParser()
 ap.add_argument('video'); ap.add_argument('--start', type=float, default=0); ap.add_argument('--duration', type=float)
@@ -21,14 +29,14 @@ a = ap.parse_args()
 fr = os.path.join(a.out, 'frames'); n = 0
 if not a.audio_only:
     os.makedirs(fr, exist_ok=True)
-    cmd = ['ffmpeg', '-v', 'error', '-y', '-ss', str(a.start), '-i', a.video]
+    cmd = [FF, '-v', 'error', '-y', '-ss', str(a.start), '-i', a.video]
     if a.duration: cmd += ['-t', str(a.duration)]
     cmd += ['-vf', 'fps=30,scale=540:960:force_original_aspect_ratio=increase,crop=540:960', '-q:v', '2', os.path.join(fr, '%04d.jpg')]
     subprocess.run(cmd, check=True)
     n = len(glob.glob(os.path.join(fr, '*.jpg'))); print('images :', n)
 os.makedirs(a.out, exist_ok=True)
 au = os.path.join(a.out, 'voix_norm.wav' if os.path.abspath(a.video)==os.path.abspath(os.path.join(a.out,'voix.wav')) else 'voix.wav')
-cmd = ['ffmpeg', '-v', 'error', '-y', '-ss', str(a.start), '-i', a.video] + (['-t', str(a.duration)] if a.duration else []) + ['-vn', '-ac', '1', '-ar', '48000', '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11', au]
+cmd = [FF, '-v', 'error', '-y', '-ss', str(a.start), '-i', a.video] + (['-t', str(a.duration)] if a.duration else []) + ['-vn', '-ac', '1', '-ar', '48000', '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11', au]
 subprocess.run(cmd); print('voix :', au)
 if a.masks and not a.audio_only:
     from rembg import remove, new_session
@@ -42,7 +50,7 @@ if a.words:
     from faster_whisper import WhisperModel
     m = WhisperModel(a.model, device='cpu', compute_type='int8')
     import numpy as np
-    raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', au, '-f', 'f32le', '-ac', '1', '-ar', '16000', '-'], capture_output=True, check=True).stdout
+    raw = subprocess.run([FF, '-v', 'error', '-i', au, '-f', 'f32le', '-ac', '1', '-ar', '16000', '-'], capture_output=True, check=True).stdout
     seg, _ = m.transcribe(np.frombuffer(raw, np.float32), language=a.lang, word_timestamps=True)
     W = []
     for s_ in seg:

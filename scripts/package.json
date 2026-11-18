@@ -1,1 +1,1 @@
-{ "name": "facecam-motion-engine", "private": true, "type": "module", "dependencies": { "puppeteer-core": "^25.0.0" } }
+{"name":"facecam-motion-engine","private":true,"type":"module","dependencies":{"@sparticuz/chromium":"^153.0.0","puppeteer-core":"^25.18.1"}}

@@ -25,10 +25,12 @@ Pour un freelance, le plan et le guide servent à faire valider le client avant 
 Lis `references/codes.md` dès qu'un code apparaît. Il donne pour chacun des 64 looks la scène du moteur, ou le remplacement à proposer (↪) quand le moteur ne sait pas le faire : demande l'accord avant de fabriquer un remplacement.
 
 ## 3. Installer le moteur (une fois par session)
-- `ffmpeg`, Node 18+, Chrome ou Chromium (passe le chemin avec `--chrome` ou `CHROME_PATH` s'il n'est pas trouvé ; sinon installe-le, par exemple `npx puppeteer browsers install chrome-headless-shell`).
-- Dans `scripts/` : `npm i` (installe puppeteer-core).
-- Python 3 : `pip install faster-whisper` (mots minutés), `pip install kokoro-onnx soundfile` (le modèle se télécharge au premier usage) pour la voix IA, `pip install rembg onnxruntime` pour détourer un produit ou une personne.
-- Si une installation est bloquée par le réseau, dis-le clairement à l'utilisateur au lieu de contourner.
+Lance `bash <studio>/scripts/setup.sh`. Il passe seulement par npm et pip, et prévoit des solutions de secours :
+- navigateur : Chrome déjà présent, sinon Chrome téléchargé, sinon Chromium livré par npm (`@sparticuz/chromium`) ;
+- ffmpeg : celui du système, sinon celui livré par pip (`imageio-ffmpeg`) ;
+- voix IA (`kokoro-onnx`) et mots minutés (`faster-whisper`), facultatifs.
+Affiche à l'utilisateur les lignes ✓ / ✗ du script. Si npm ou pip sont bloqués, dis-lui d'activer l'accès réseau sortant dans les réglages de Claude (Paramètres → Capacités) puis d'ouvrir une **nouvelle** session : un réglage changé ne s'applique pas à une session déjà ouverte. Ne contourne jamais un blocage réseau.
+Le modèle de la voix IA se télécharge depuis GitHub au premier usage ; s'il est bloqué, propose à l'utilisateur d'enregistrer sa propre voix.
 
 ## 4. Fabriquer
 1. **Voix** : IA gratuite `python3 <studio>/scripts/tts.py script.txt` (voix française ff_siwis ; écris les noms anglais comme ils se prononcent, par exemple « Hydra Glo », « i-bouk ») ou voix de l'utilisateur. Puis `python3 <studio>/scripts/prepare.py voix.wav --audio-only --words` → `work/voix.wav` + `work/words.json`.
