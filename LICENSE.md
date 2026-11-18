@@ -1,0 +1,1 @@
+© STUDIO CAPTIV. Ce kit est fourni aux élèves de la formation STUDIO CAPTIV pour leur usage personnel et pour leurs clients. Revente, redistribution ou publication du kit, en tout ou en partie, interdites sans autorisation écrite.
