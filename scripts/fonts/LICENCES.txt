@@ -1,0 +1,4 @@
+Poppins (Indian Type Foundry) et Fraunces (Undercase Type) sont distribuées sous licence SIL Open Font License 1.1 :
+https://openfontlicense.org — usage commercial autorisé, la police ne peut pas être vendue seule.
+
+Inter (The Inter Project Authors), Instrument Serif (Instrument) et Great Vibes (TypeSETit) sont aussi sous SIL Open Font License 1.1 (fichiers issus de Fontsource, sous-ensemble latin) : usage commercial autorisé, la police ne peut pas être vendue seule.

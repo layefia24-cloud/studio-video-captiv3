@@ -1,0 +1,143 @@
+{
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "duration": 12.3,
+ "brand": {
+  "primary": "#fbbf24",
+  "accent": "#fbbf24",
+  "dark": "#05070d",
+  "light": "#f1efea",
+  "font": "Poppins"
+ },
+ "palette": {
+  "acc": "#fbbf24",
+  "accDark": "#92400e",
+  "white": "#fff7ea",
+  "black": "#0b0703"
+ },
+ "special": "script",
+ "source": {
+  "frames": "work/frames",
+  "count": 900,
+  "fps": 30,
+  "offset": 0
+ },
+ "words": "work/words.json",
+ "look": "studio",
+ "captions": {
+  "on": true,
+  "style": "mix",
+  "band": true,
+  "y": 0.82,
+  "size": 3.1,
+  "maxWords": 7,
+  "hl": [
+   "concrètes",
+   "demain",
+   "exactement",
+   "largement",
+   "courtes",
+   "présentation",
+   "publicités",
+   "script",
+   "quartier"
+  ],
+  "strong": [
+   "trois",
+   "quatre",
+   "48",
+   "10"
+  ]
+ },
+ "uiScale": 0.62,
+ "scenes": [
+  {
+   "t0": 0,
+   "t1": 1.4,
+   "type": "cubes",
+   "bars": "gold",
+   "title": "Trois *gammes*",
+   "items": [
+    "Entrée",
+    "Milieu",
+    "Haut"
+   ],
+   "active": 0,
+   "captions": false
+  },
+  {
+   "t0": 1.4,
+   "t1": 4.0,
+   "type": "pside",
+   "bars": "gold",
+   "src": "img/boutique.jpg",
+   "label": "4 vidéos courtes / mois",
+   "over": "commerce de *quartier*",
+   "fx": "blur",
+   "captions": false
+  },
+  {
+   "t0": 4.0,
+   "t1": 5.3,
+   "type": "pface",
+   "fx": "blur"
+  },
+  {
+   "t0": 5.3,
+   "t1": 8.6,
+   "type": "ba",
+   "bars": "gold",
+   "before": "img/market.jpg",
+   "after": "img/womanphone.jpg",
+   "la": "Sans vidéo",
+   "lb": "Vidéo de présentation · 48 h",
+   "ratio": 1.3,
+   "title": "Le milieu de *gamme*",
+   "fx": "blur",
+   "captions": false
+  },
+  {
+   "t0": 8.6,
+   "t1": 10.0,
+   "type": "ptext",
+   "lines": [
+    {
+     "text": "Le haut de gamme",
+     "at": 0
+    },
+    {
+     "text": "10 pubs",
+     "big": true,
+     "at": 0.25
+    },
+    {
+     "text": "d'*un seul* script",
+     "at": 0.6
+    }
+   ],
+   "captions": false
+  },
+  {
+   "t0": 10.0,
+   "t1": 12.3,
+   "type": "deck",
+   "bars": "gold",
+   "cards": [
+    "img/boutique.jpg",
+    "img/food.jpg",
+    "img/hoodies.jpg",
+    "img/cosmo.jpg",
+    "img/market.jpg",
+    "img/skin.jpg",
+    "img/fabrics.jpg",
+    "img/womanphone.jpg",
+    "img/insta.jpg",
+    "img/lagos.jpg"
+   ],
+   "title": "10 *publicités*, 1 script",
+   "captions": false,
+   "out": "blur"
+  }
+ ]
+}
