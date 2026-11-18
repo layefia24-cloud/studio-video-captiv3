@@ -1,0 +1,261 @@
+{
+ "width": 1080,
+ "height": 1920,
+ "fps": 30,
+ "faceless": true,
+ "theme": "tech",
+ "brand": {
+  "primary": "#ff2d2d",
+  "handle": "@monstudio",
+  "name": "MON STUDIO"
+ },
+ "words": "work/words.json",
+ "captions": {
+  "on": true,
+  "y": 0.8
+ },
+ "scenes": [
+  {
+   "t0": 0,
+   "t1": 1.8,
+   "type": "kinetic",
+   "theme": "tech",
+   "lines": [
+    {
+     "text": "Ton animation",
+     "size": 8
+    },
+    {
+     "text": "n'a pas de *vie* ?",
+     "size": 10,
+     "at": 0.5
+    }
+   ],
+   "captions": false
+  },
+  {
+   "t0": 1.8,
+   "t1": 3.0,
+   "type": "kinetic",
+   "theme": "poster",
+   "circle": true,
+   "img": "img/personnage_pose1.png",
+   "imgW": 0.7,
+   "bw": true,
+   "imgY": 0.45,
+   "lines": [
+    {
+     "text": "c'est *normal*",
+     "size": 9,
+     "y": 0.8
+    }
+   ],
+   "captions": false
+  },
+  {
+   "t0": 3.0,
+   "t1": 6.2,
+   "type": "graph",
+   "theme": "tech",
+   "curve": "linear",
+   "label": "Linéaire",
+   "caption": "Un objet qui *avance*"
+  },
+  {
+   "t0": 6.2,
+   "t1": 8.9,
+   "type": "graph",
+   "theme": "tech",
+   "curve": "easeOut",
+   "label": "Entrée · easing out",
+   "caption": "il part d'un *coup*"
+  },
+  {
+   "t0": 8.9,
+   "t1": 10.2,
+   "type": "bento",
+   "theme": "bento",
+   "tiles": [
+    {
+     "kind": "stat",
+     "value": 3,
+     "label": "réglages",
+     "title": "Courbes",
+     "dark": true,
+     "color": "#22c55e"
+    },
+    {
+     "kind": "clock",
+     "title": "Durée"
+    },
+    {
+     "kind": "bar",
+     "value": 82,
+     "title": "Rétention",
+     "wide": true
+    },
+    {
+     "kind": "dots",
+     "value": 9,
+     "title": "Jours actifs",
+     "dark": true,
+     "wide": true
+    }
+   ]
+  },
+  {
+   "t0": 10.2,
+   "t1": 11.4,
+   "type": "kinetic",
+   "theme": "dark",
+   "ghost": "CHANGE",
+   "lines": [
+    {
+     "text": "ta vidéo",
+     "size": 6
+    },
+    {
+     "text": "change *tout*",
+     "size": 11,
+     "at": 0.3
+    }
+   ],
+   "captions": false
+  },
+  {
+   "t0": 11.4,
+   "t1": 14.2,
+   "type": "cta",
+   "theme": "tech",
+   "small": "Commente",
+   "big": "« MOTION »",
+   "sub": "et je t'envoie la méthode"
+  },
+  {
+   "t0": 14.2,
+   "t1": 15.8,
+   "type": "kinetic",
+   "theme": "pub",
+   "lines": [
+    {
+     "text": "LE PLUS DUR ?",
+     "size": 7
+    },
+    {
+     "text": "*MOI.*",
+     "size": 22,
+     "at": 0.3
+    }
+   ],
+   "stamp": true,
+   "stampText": "ÇA MARCHE.",
+   "stampAt": 0.8,
+   "stampY": 0.72
+  },
+  {
+   "t0": 15.8,
+   "t1": 17.6,
+   "type": "cards",
+   "theme": "cream",
+   "header": "8 outils | motion design",
+   "layout": "checklist",
+   "items": [
+    "Le script",
+    "La voix off",
+    "Les mouvements"
+   ]
+  },
+  {
+   "t0": 17.6,
+   "t1": 19.2,
+   "type": "kinetic",
+   "theme": "white",
+   "lines": [
+    {
+     "text": "et plus de",
+     "size": 5
+    },
+    {
+     "text": "*329+* élèves",
+     "size": 11,
+     "at": 0.3
+    }
+   ]
+  },
+  {
+   "t0": 19.2,
+   "t1": 21.0,
+   "type": "avatar",
+   "theme": "beige",
+   "pose": "img/personnage_pose1.png",
+   "side": "r",
+   "title": "Pour t'apprendre *à…*",
+   "items": [
+    "Réaliser des vidéos fluides",
+    "Créer du contenu qui vend"
+   ]
+  },
+  {
+   "t0": 21.0,
+   "t1": 22.8,
+   "type": "object",
+   "theme": "studio",
+   "src": "img/objet.png",
+   "counter": 2000000,
+   "label": "Notre client a fait *percer*",
+   "caption": "en *30 jours*",
+   "ribbon": true,
+   "w": 0.4,
+   "y": 0.6
+  },
+  {
+   "t0": 22.8,
+   "t1": 24.6,
+   "type": "phoneui",
+   "theme": "beige",
+   "step": "ÉTAPE 2",
+   "title": "Appuie sur *« Enregistrer »*",
+   "src": "img/capture_appli.jpg",
+   "tap": {
+    "x": 0.5,
+    "y": 0.8,
+    "at": 0.6
+   },
+   "tags": [
+    {
+     "text": "La voix",
+     "side": "l",
+     "y": 0.45
+    },
+    {
+     "text": "La coupe",
+     "side": "r",
+     "y": 0.55
+    }
+   ]
+  },
+  {
+   "t0": 24.6,
+   "t1": 26.2,
+   "type": "kinetic",
+   "theme": "mono",
+   "lines": [
+    {
+     "text": "every *AI agent* you use",
+     "size": 6
+    },
+    {
+     "text": "has a *live data* problem",
+     "size": 6,
+     "at": 0.3
+    }
+   ]
+  },
+  {
+   "t0": 26.2,
+   "t1": 28,
+   "type": "end",
+   "tagline": "MOTION DESIGN"
+  }
+ ]
+}

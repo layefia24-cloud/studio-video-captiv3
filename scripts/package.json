@@ -1,0 +1,1 @@
+{ "name": "facecam-motion-engine", "private": true, "type": "module", "dependencies": { "puppeteer-core": "^25.0.0" } }

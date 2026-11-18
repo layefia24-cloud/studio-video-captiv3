@@ -1,0 +1,140 @@
+{
+ "width": 1080,
+ "height": 1920,
+ "fps": 30,
+ "duration": 14.1,
+ "brand": {
+  "primary": "#2563eb",
+  "accent": "#4ade80",
+  "dark": "#0b1220",
+  "light": "#f1efea",
+  "font": "Poppins"
+ },
+ "source": {
+  "frames": "work/frames",
+  "count": 900,
+  "fps": 30,
+  "offset": 0
+ },
+ "words": "work/words.json",
+ "look": "studio",
+ "captions": {
+  "on": true,
+  "style": "mix",
+  "y": 0.62,
+  "size": 4.7,
+  "maxWords": 6,
+  "hl": [
+   "concrètes",
+   "demain",
+   "exactement",
+   "largement"
+  ],
+  "strong": [
+   "trois",
+   "vendre",
+   "offres"
+  ]
+ },
+ "scenes": [
+  {
+   "t0": 0,
+   "t1": 2.6,
+   "type": "short",
+   "punch": true
+  },
+  {
+   "t0": 2.6,
+   "t1": 5.5,
+   "type": "short",
+   "ui": [
+    {
+     "kind": "notif",
+     "at": 0.8,
+     "y": 0.76,
+     "items": [
+      {
+       "title": "Paiement reçu",
+       "sub": "Client 1 · pack mensuel",
+       "from": 0,
+       "to": 75000,
+       "suffix": " F",
+       "prefix": "+"
+      },
+      {
+       "title": "Paiement reçu",
+       "sub": "Client 2 · vidéo de présentation",
+       "to": 120000,
+       "suffix": " F",
+       "prefix": "+"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 5.5,
+   "t1": 9.4,
+   "type": "short",
+   "ui": [
+    {
+     "kind": "prompt",
+     "at": 0.3,
+     "y": 0.78,
+     "text": "Quelles offres vidéo proposer à mes clients ?",
+     "cps": 20,
+     "brand": "Assistant IA"
+    }
+   ]
+  },
+  {
+   "t0": 9.4,
+   "t1": 11.7,
+   "type": "stage",
+   "bg": "blue",
+   "layout": "wall",
+   "cards": [
+    "img/boutique.jpg",
+    "img/food.jpg",
+    "img/hoodies.jpg",
+    "img/cosmo.jpg",
+    "img/market.jpg",
+    "img/skin.jpg",
+    "img/fabrics.jpg",
+    "img/womanphone.jpg",
+    "img/insta.jpg",
+    "img/ai_2.jpg",
+    "img/ai_11.jpg",
+    "img/ai_21.jpg"
+   ],
+   "title": "Trois offres *suffisent*",
+   "fx": "blur",
+   "captions": false,
+   "big": "3",
+   "bigAt": 0.5,
+   "sub": "pour *presque tous* les clients"
+  },
+  {
+   "t0": 11.7,
+   "t1": 14.1,
+   "type": "stage",
+   "bg": "blue",
+   "split": 0.5,
+   "layout": "carousel",
+   "cards": [
+    "img/boutique.jpg",
+    "img/food.jpg",
+    "img/hoodies.jpg",
+    "img/cosmo.jpg",
+    "img/market.jpg",
+    "img/skin.jpg"
+   ],
+   "title": "Tous les *besoins* de tes clients",
+   "ty": 0.15,
+   "cw": 0.4,
+   "every": 0.7,
+   "captions": false,
+   "out": "blur"
+  }
+ ]
+}
