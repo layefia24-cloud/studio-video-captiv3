@@ -1,0 +1,415 @@
+{
+ "width": 1080,
+ "height": 1920,
+ "fps": 30,
+ "duration": 25.2,
+ "captions": {
+  "on": false
+ },
+ "ed": {
+  "olive": "#4E5E40",
+  "tan": "#C9AE8A"
+ },
+ "scenes": [
+  {
+   "t0": 0,
+   "t1": 2.45,
+   "type": "ed",
+   "dark": true,
+   "bgc": "#211813",
+   "captions": false,
+   "els": [
+    {
+     "kind": "kicker",
+     "text": "Question du jour",
+     "al": "center",
+     "y": 0.25,
+     "col": "#A89A8A"
+    },
+    {
+     "kind": "title",
+     "text": "Tu galères à créer du *contenu* chaque *semaine ?*",
+     "al": "center",
+     "y": 0.33,
+     "size": 7.4,
+     "w": 0.84,
+     "col": "#E8DCCB",
+     "icol": "#C9AE8A",
+     "at": 0.05
+    }
+   ]
+  },
+  {
+   "t0": 2.45,
+   "t1": 4.6,
+   "type": "ed",
+   "wipe": "olive",
+   "captions": false,
+   "els": [
+    {
+     "kind": "header",
+     "brand": "STUDIO CAPTIV",
+     "center": true,
+     "y": 0.05
+    },
+    {
+     "kind": "title",
+     "text": "Bonne nouvelle :",
+     "al": "center",
+     "y": 0.2,
+     "size": 4.4,
+     "at": 0.1
+    },
+    {
+     "kind": "title",
+     "text": "ton *téléphone* __suffit__",
+     "al": "center",
+     "y": 0.27,
+     "size": 8,
+     "at": 0.6
+    },
+    {
+     "kind": "icons",
+     "at": 0.9,
+     "step": 0.12,
+     "items": [
+      {
+       "icon": "video",
+       "x": 0.2,
+       "y": 0.5,
+       "col": "olive"
+      },
+      {
+       "icon": "mic",
+       "x": 0.8,
+       "y": 0.48,
+       "col": "olive"
+      },
+      {
+       "icon": "heart",
+       "x": 0.22,
+       "y": 0.75,
+       "col": "tan"
+      },
+      {
+       "icon": "star",
+       "x": 0.8,
+       "y": 0.74,
+       "col": "tan"
+      }
+     ]
+    },
+    {
+     "kind": "phone",
+     "at": 0.5,
+     "x": 0.5,
+     "y": 0.4,
+     "w": 0.34,
+     "src": "img/capture.jpg"
+    }
+   ]
+  },
+  {
+   "t0": 4.6,
+   "t1": 7.35,
+   "type": "ed",
+   "captions": false,
+   "gx": 0.35,
+   "els": [
+    {
+     "kind": "header",
+     "brand": "STUDIO CAPTIV",
+     "right": "Ton studio",
+     "prog": 0.25
+    },
+    {
+     "kind": "kicker",
+     "text": "Étape 1 · installer",
+     "y": 0.115
+    },
+    {
+     "kind": "title",
+     "text": "Ton studio *en 2 minutes*",
+     "y": 0.17,
+     "size": 7.2,
+     "at": 0.05
+    },
+    {
+     "kind": "char",
+     "src": "img/personnage.png",
+     "x": 0.24,
+     "y": 0.97,
+     "h": 0.6,
+     "at": 0
+    },
+    {
+     "kind": "cards",
+     "x": 0.47,
+     "y": 0.38,
+     "w": 0.5,
+     "at": 0.15,
+     "step": 0.45,
+     "items": [
+      {
+       "icon": "bolt",
+       "title": "Une application",
+       "sub": "Claude, sur ton téléphone"
+      },
+      {
+       "icon": "box",
+       "title": "Un projet",
+       "sub": "« Mon studio vidéo »",
+       "ic": "tan"
+      },
+      {
+       "icon": "check",
+       "title": "Studio prêt",
+       "sub": "en une seule fois",
+       "ic": "brown"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 7.35,
+   "t1": 12.85,
+   "type": "ed",
+   "wipe": "tan",
+   "captions": false,
+   "els": [
+    {
+     "kind": "header",
+     "brand": "STUDIO CAPTIV",
+     "right": "La méthode",
+     "prog": 0.5
+    },
+    {
+     "kind": "kicker",
+     "text": "La méthode",
+     "y": 0.115
+    },
+    {
+     "kind": "title",
+     "text": "5 étapes",
+     "sub": "*du brief à la vidéo*",
+     "y": 0.17,
+     "size": 7.2,
+     "at": 0.05
+    },
+    {
+     "kind": "numlist",
+     "x": 0.05,
+     "y": 0.33,
+     "at": 1.4,
+     "step": 0.95,
+     "items": [
+      "Le brief",
+      "Les questions",
+      "Le plan",
+      "Le guide des références",
+      "Ta vidéo"
+     ]
+    },
+    {
+     "kind": "char",
+     "src": "img/personnage.png",
+     "x": 0.78,
+     "y": 0.97,
+     "h": 0.55,
+     "flip": true,
+     "at": 0.2
+    },
+    {
+     "kind": "tag",
+     "text": "Tu choisis, Claude fabrique",
+     "icon": "check",
+     "col": "olive",
+     "x": 0.05,
+     "y": 0.76,
+     "at": 4.9
+    }
+   ]
+  },
+  {
+   "t0": 12.85,
+   "t1": 15.15,
+   "type": "ed",
+   "captions": false,
+   "els": [
+    {
+     "kind": "header",
+     "brand": "STUDIO CAPTIV",
+     "center": true
+    },
+    {
+     "kind": "title",
+     "text": "Tes images suivent *ta voix.*",
+     "al": "center",
+     "y": 0.14,
+     "size": 7,
+     "w": 0.92,
+     "at": 0.05
+    },
+    {
+     "kind": "text",
+     "text": "Pas l'inverse.",
+     "y": 0.29,
+     "size": 2.8,
+     "at": 1.2
+    },
+    {
+     "kind": "tracks",
+     "x": 0.05,
+     "y": 0.33,
+     "w": 0.9,
+     "at": 0.3,
+     "head": true,
+     "dur": 1.8
+    },
+    {
+     "kind": "char",
+     "src": "img/personnage.png",
+     "x": 0.22,
+     "y": 0.97,
+     "h": 0.38,
+     "at": 0.6
+    },
+    {
+     "kind": "cards",
+     "x": 0.4,
+     "y": 0.7,
+     "w": 0.56,
+     "at": 1.1,
+     "items": [
+      {
+       "icon": "mic",
+       "title": "La voix d'abord",
+       "sub": "puis les animations, au bon moment"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 15.15,
+   "t1": 18.15,
+   "type": "ed",
+   "captions": false,
+   "gx": 0.7,
+   "els": [
+    {
+     "kind": "header",
+     "brand": "STUDIO CAPTIV",
+     "right": "Sans matériel",
+     "prog": 0.75
+    },
+    {
+     "kind": "title",
+     "text": "Tu n'as pas besoin",
+     "sub": "__de matériel__",
+     "y": 0.15,
+     "size": 7,
+     "at": 0
+    },
+    {
+     "kind": "pills",
+     "x": 0.05,
+     "y": 0.34,
+     "at": 0.15,
+     "step": 0.55,
+     "items": [
+      {
+       "text": "Aucun logiciel",
+       "kind": "x"
+      },
+      {
+       "text": "Aucune caméra",
+       "kind": "x"
+      },
+      {
+       "text": "Aucun ordinateur",
+       "kind": "x"
+      },
+      {
+       "text": "100 % sur ton téléphone",
+       "fill": "olive",
+       "icon": "check",
+       "ic": "tan"
+      }
+     ]
+    },
+    {
+     "kind": "char",
+     "src": "img/personnage.png",
+     "x": 0.74,
+     "y": 0.97,
+     "h": 0.58,
+     "at": 0.1
+    }
+   ]
+  },
+  {
+   "t0": 18.15,
+   "t1": 21.35,
+   "type": "ed",
+   "wipe": "olive",
+   "captions": false,
+   "els": [
+    {
+     "kind": "header",
+     "brand": "STUDIO CAPTIV",
+     "center": true
+    },
+    {
+     "kind": "title",
+     "text": "Tu choisis *tes animations*",
+     "al": "center",
+     "y": 0.13,
+     "size": 6.4,
+     "at": 0.05
+    },
+    {
+     "kind": "phone",
+     "at": 0.3,
+     "x": 0.5,
+     "y": 0.25,
+     "w": 0.42,
+     "src": "img/capture2.jpg",
+     "notes": [
+      {
+       "text": "Scène 6 : P03 ✓",
+       "x": 0.26,
+       "y": 0.42,
+       "at": 0.9
+      },
+      {
+       "text": "Ta vidéo est prête !",
+       "x": 0.72,
+       "y": 0.62,
+       "at": 1.8
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "t0": 21.35,
+   "t1": 25.2,
+   "type": "ed",
+   "captions": false,
+   "els": [
+    {
+     "kind": "logo",
+     "brand": "STUDIO CAPTIV",
+     "sub": "La formation vidéo",
+     "tagline": "Capter, retenir, convertir.",
+     "y": 0.47,
+     "size": 6,
+     "ls": 1.6,
+     "at": 0.1
+    }
+   ]
+  }
+ ]
+}

@@ -5,7 +5,7 @@ L'utilisateur choisit souvent une animation par son **code** (« mets du P03 »,
 Chaque code a sa vignette dans `vignettes/<code>.jpg` (ex. `vignettes/P3.jpg`, `vignettes/P3-produit.jpg`, `vignettes/L4.jpg`) : montre-la à l'utilisateur quand tu proposes ce code.
 
 ## Lire un code
-- **Lettre = onglet du look book** : `L` = Format court (17 looks), `P` = Premium 16:9 (17 looks), `A` = Face caméra verticale (10 looks), `B` = Motion design éducatif (20 looks), `SS` = interfaces Stageshow.
+- **Lettre = onglet du look book** : `L` = Format court (17 looks), `P` = Premium 16:9 (17 looks), `A` = Face caméra verticale (10 looks), `B` = Motion design éducatif (20 looks), `E` = Éditorial crème (15 looks, sans visage), `X` = Effets derrière toi (31 looks, face caméra), `O` = Objets illustrés (21 looks, face caméra), `SS` = interfaces Stageshow.
 - **Numéro** : `P3`, `P03` et `p3` désignent le même look. Dans le look book, l'onglet Format court numérote ses fiches sans lettre (« 4. Badge d'étape ») : c'est `L4`.
 - **Fidélité** : ✅ le moteur refait le look ; ≈ le moteur s'en approche (dis-le à l'utilisateur) ; ↪ le moteur ne sait pas le faire, propose le remplacement indiqué et demande s'il convient avant de fabriquer.
 - Les looks premium (`P`) marchent en 16:9 comme en 9:16. Les looks `L` et `A` sont pensés pour le 9:16.
@@ -90,6 +90,87 @@ Chaque code a sa vignette dans `vignettes/<code>.jpg` (ex. `vignettes/P3.jpg`, `
 | B18 | Appli de paiement verte | `phoneui` ou démo Stageshow `payout-flow` | ≈ |
 | B19 | Plage 3D, rangée de téléphones | ↪ `stage` `layout:"row"` avec des captures | ↪ |
 | B20 | Désert 3D, maisons sur pilotis | ↪ `photo` (vraie photo de décor, zoom lent) + un mot blanc | ↪ |
+
+## E · Éditorial crème (sans visage, scène `ed`, voir `editorial.md`)
+| Code | Look | Recette | Fidélité |
+|---|---|---|---|
+| E1 | Question du jour sur fond sombre | `ed` `dark:true` + `kicker` + `title` centré | ✅ |
+| E2 | Titre serif mot à mot + italique | `title` (`*mot*`, `__souligné__`, `~~barré~~`) | ✅ |
+| E3 | Personnage qui présente des cartes | `char` + `cards` | ✅ (personnage fourni) |
+| E4 | Compteur + pastille « validé » | `counter` (`pill`) | ✅ |
+| E5 | Liste 1-2-3 à pastilles | `numlist` | ✅ |
+| E6 | Lignes barrées / cochées | `pills` (`kind:"x"` / `"check"`) | ✅ |
+| E7 | Calendrier qui se remplit | `calendar` | ✅ |
+| E8 | Groupe / réseau de personnes | `people`, `network` | ✅ |
+| E9 | Gros numéro d'étape « 01 » | `bignum` | ✅ |
+| E10 | Pistes de montage images + voix | `tracks` | ✅ |
+| E11 | Téléphone + bulles | `phone` (`notes`) | ✅ |
+| E12 | Anneau de pourcentage | `donut` | ✅ |
+| E13 | Pictogrammes (horloge, cadenas, coche, interdits) | `clock`, `lock`, `bigcheck`, `icons` (`no:true`) | ✅ |
+| E14 | Volet olive / sable entre chapitres | `"wipe":"olive"` ou `"tan"` sur la scène | ✅ |
+| E15 | Logo final + signature | `logo` | ✅ |
+
+## X · Effets derrière toi (face caméra, scène `fx`, voir `effets.md`)
+Toujours avec une vidéo de la personne détourée (`prepare.py --masks`). Un effet par vidéo (sauf démo d'effets avec `titre`).
+| Code | Look | Recette | Fidélité |
+|---|---|---|---|
+| X1 | Une enveloppe tombe en tournant derrière la tête, rebondit, le rabat s'ouvre et 5 vidéos sortent en éventail | `fx` `enveloppe` | ✅ |
+| X2 | Un dossier apparaît, un curseur clique, le dossier s'écrase, 7 vidéos jaillissent et se posent autour de la personne | `fx` `dossier` | ✅ |
+| X3 | Un appareil instantané flashe, imprime deux photos qui partent sur les côtés et se développent en vignettes | `fx` `polaroid` | ✅ |
+| X4 | Un tapis roulant passe derrière la personne ; les vidéos défilent et reçoivent une coche au milieu | `fx` `tapis` | ✅ |
+| X5 | Une fenêtre « Mes vidéos » pleine de `final_FINAL.mp4` ; le curseur clique et chaque fichier se joue dans un aperçu | `fx` `fichiers` | ✅ |
+| X6 | Un anneau fin se dessine, puis de grandes vignettes tournent autour de la tête, derrière puis devant | `fx` `orbite` | ✅ |
+| X7 | Un mur de vignettes avec leur titre en serif italique | `fx` `mur` | ✅ |
+| X8 | Fond lilas, la personne dans un cadre photo, sa tête en sort | `fx` `cadre` | ✅ |
+| X9 | La vidéo devient un Reel dans un téléphone sur fond pastel | `fx` `telephone` | ✅ |
+| X10 | Mur de unes : des feuilles de papier avec de gros titres et des étiquettes colorées | `fx` `titres` | ✅ |
+| X11 | La caméra plonge dans le visage puis coupe net | `fx` `traversant` | ✅ |
+| X12 | La caméra recule : la personne est dans une fenêtre d'immeuble la nuit | `fx` `immeuble` | ✅ |
+| X13 | Fond vert remplacé : ciel de coucher de soleil, soleil derrière la tête, montagnes, pastille « CHROMA KEY ON » | `fx` `decor` | ✅ |
+| X14 | Un couloir de cadres file vers l'arrière derrière la personne | `fx` `vertigo` | ✅ |
+| X15 | Texte chromé en relief : 1re ligne derrière, 2e devant | `fx` `verre` | ✅ |
+| X16 | Un anneau doré lumineux derrière la tête | `fx` `halo` | ✅ |
+| X17 | UI World : des panneaux d'interface (calques, réglages, compteur, aperçu, timeline) flottent autour, le curseur clique « Appliquer » | `fx` `ui` | ✅ |
+| X18 | Viseur de caméra : REC, timecode, mise au point sur le visage, zoom 2.0x | `fx` `zoomcam` | ✅ |
+| X19 | Une carte blanche dont les cases se cochent et se barrent, compteur 03/17 | `fx` `checklist` | ✅ |
+| X20 | Fond bleu nuit, des barres et une courbe grimpent derrière la personne | `fx` `courbe2` | ✅ |
+| X21 | Des bandes de papier déchiré traversent l'écran, avec un titre | `fx` `papier` | ✅ |
+| X22 | Gribouillis vivants : halo, flèches, étoiles et bulle dessinés à la main qui tremblent | `fx` `doodle` | ✅ |
+| X23 | La personne fait la une d'un magazine (titre, badge rond, code-barres) | `fx` `magazine` | ✅ |
+| X24 | Carte de fin en verre « COMMENTE [MOT] » sur rayons lumineux, grand mot final | `fx` `fin` | ✅ |
+| X25 | Des points d'interrogation flottent autour de la tête | `fx` `questions` | ✅ |
+| X26 | Un arc de drapeaux (ou d'icônes colorées) se déploie autour de la tête | `fx` `arc` | ✅ |
+| X27 | De grandes photos surgissent au-dessus de la tête puis s'ouvrent en éventail | `fx` `photos` | ✅ |
+| X28 | Un mot géant lumineux derrière la personne, avec un halo coloré | `fx` `motgeant` | ✅ |
+| X29 | Des chiffres flottent autour de la personne | `fx` `chiffres` | ✅ |
+| X30 | Une icône néon qui s'allume en clignotant derrière la personne | `fx` `neon` | ✅ |
+| X31 | Une grande forme colorée ondule derrière la personne | `fx` `forme` | ✅ |
+
+## O · Objets illustrés (face caméra sur fond crème, cabine ou nuit, scène `fx`)
+La personne détourée en bas (`"bg":"creme","zoomP":0.85`), un objet au-dessus de sa tête, la phrase en haut à gauche avec un mot en serif italique. Fonds : `creme`, `cabine` (pastel perforé), `nuit2`. Options : `reperes`, `annot`, `trame`, `cap:"tuiles"` (voir `effets.md`).
+| Code | Look | Recette | Fidélité |
+|---|---|---|---|
+| O1 | Un compteur qui défile dans une carte (abonnés, vues…) | `fx` `compteur` | ✅ |
+| O2 | Un coffre-fort qui s'ouvre sur un mot | `fx` `coffre` | ✅ |
+| O3 | Un tampon qui s'écrase (VALIDÉ, FAUX…) | `fx` `tampon` | ✅ |
+| O4 | Des barres qui montent, la dernière en couleur | `fx` `barres` | ✅ |
+| O5 | Des marches numérotées 1 à 5 | `fx` `marches` | ✅ |
+| O6 | Une bulle de question qui s'écrit | `fx` `bulle` | ✅ |
+| O7 | Gros titre rouge condensé qui claque (deux lignes : sépare-les par une barre verticale) | `fx` `grostitre` | ✅ |
+| O8 | Trois autocollants épinglés avec icône et mot | `fx` `stickers` | ✅ |
+| O9 | Une courbe pointillée monte dans une carte, un point rouge la parcourt | `fx` `courbe` | ✅ |
+| O10 | Carte sombre de statistiques (vues sur 30 jours) qui défile | `fx` `stats` | ✅ |
+| O11 | Carte de profil : photo, nom, 3 chiffres, compteur rouge | `fx` `profil` | ✅ |
+| O12 | Fenêtre de chat « Que veux-tu créer ? », une ligne s'écrit, étiquette rouge | `fx` `chat` | ✅ |
+| O13 | Un téléphone + un panneau « Claude construit ta vidéo » dont les étapes se cochent | `fx` `construit` | ✅ |
+| O14 | Les commentaires + des lettres-tuiles qui forment le mot-clé | `fx` `motcle` | ✅ |
+| O15 | Des options en pastilles, le curseur clique la bonne | `fx` `choix` | ✅ |
+| O16 | Bulle numérotée « 1 D'ABORD » avec l'objection qui s'écrit et un grand « ? » | `fx` `objection` | ✅ |
+| O17 | Des câbles numérotés descendent et se branchent dans une multiprise | `fx` `multiprise` | ✅ |
+| O18 | Un terminal : des commandes s'écrivent, coches vertes | `fx` `terminal` | ✅ |
+| O19 | Compteur mécanique à chiffres | `fx` `compteurmeca` | ✅ |
+| O20 | Liste de tâches qui se cochent + horloge | `fx` `taches` | ✅ |
+| O21 | Tableau de bord bleu nuit en verre lumineux | `fx` `tableau` | ✅ |
 
 ## SS · Interfaces Stageshow
 Codes : `SS · <exemple>`, par exemple `SS · ai-chat`. Stageshow (MIT) est un projet séparé : copie l'exemple, traduis les textes, filme-le (capture CDP image par image) et place la vidéo dans une scène `clip` (`dir`, `count`, `fps`, `title`), `pside` ou `cutaway`. Sans Stageshow installé, prends l'équivalent du moteur.

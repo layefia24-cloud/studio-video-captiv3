@@ -1,0 +1,18 @@
+[HOOK A]
+Tu mets du lait tous les jours. Pourtant ta peau tire encore. Le problème n'est pas ton lait.
+[ECRAN A]
+PEAU QUI TIRE ?
+[HOOK B]
+Cette habitude du matin assèche ta peau. Et tu la fais tous les jours.
+[ECRAN B]
+L'ERREUR DU MATIN
+[HOOK C]
+Regarde : même peau, même lait. Seul le moment change.
+[ECRAN C]
+MÊME LAIT, AUTRE MOMENT
+[LOCKIN]
+C'est la règle des 3 minutes. Et presque personne ne la connaît.
+[CORPS]
+Erreur numéro un : l'eau trop chaude. Elle enlève le gras naturel de ta peau, donc ta peau se vide de son eau. Mais ce n'est pas le pire. Erreur numéro deux : attendre d'être bien sèche pour mettre ton lait. Résultat, il reste en surface. Et la troisième, même les esthéticiennes la font. Le secret, c'est d'appliquer ton lait dans les trois minutes après la douche, sur une peau encore humide.
+[FIN]
+Toi, tu mets ton lait avant ou après t'être séchée ? Réponds AVANT ou APRÈS.

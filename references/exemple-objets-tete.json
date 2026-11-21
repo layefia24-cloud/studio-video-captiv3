@@ -1,0 +1,205 @@
+{
+ "width": 1080,
+ "height": 1920,
+ "fps": 30,
+ "brand": {
+  "primary": "#FF5A3C",
+  "accent": "#FF5A3C",
+  "dark": "#15131a",
+  "light": "#F4EFE8",
+  "ink": "#1d1b20",
+  "font": "Poppins",
+  "handle": "@studio.captiv",
+  "name": "STUDIO CAPTIV"
+ },
+ "source": {
+  "frames": "work/frames",
+  "masks": "work/masks",
+  "count": 481,
+  "fps": 30
+ },
+ "words": "work/words.json",
+ "captions": {
+  "on": true
+ },
+ "reels": [
+  "img/r1.jpg",
+  "img/r2.jpg",
+  "img/r3.jpg",
+  "img/r4.jpg",
+  "img/r5.jpg",
+  "img/r6.jpg",
+  "img/r7.jpg",
+  "img/r8.jpg"
+ ],
+ "scenes": [
+  {
+   "t0": 0,
+   "t1": 2.32,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "photos",
+    "at": 0.4,
+    "n": 3,
+    "y": 0.13
+   },
+   "cap": "duo"
+  },
+  {
+   "t0": 2.32,
+   "t1": 4.44,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "chiffres",
+    "at": 0.3,
+    "items": [
+     [
+      "des dizaines",
+      "de vidéos"
+     ],
+     [
+      "5",
+      "styles"
+     ],
+     [
+      "1",
+      "téléphone"
+     ]
+    ]
+   },
+   "cap": "duo"
+  },
+  {
+   "t0": 4.44,
+   "t1": 6.1,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "arc",
+    "at": 0.1
+   },
+   "cap": "duo"
+  },
+  {
+   "t0": 6.1,
+   "t1": 8.04,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "motgeant",
+    "at": 0.6,
+    "mot": "USINE"
+   },
+   "cap": "duo"
+  },
+  {
+   "t0": 8.04,
+   "t1": 10.9,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "questions",
+    "at": 0.4
+   },
+   "cap": "duo"
+  },
+  {
+   "t0": 10.9,
+   "t1": 13.44,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "neon",
+    "at": 1.1,
+    "icon": "coche"
+   },
+   "cap": "duo",
+   "bg": "orig"
+  },
+  {
+   "t0": 13.44,
+   "t1": 16.05,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "fin",
+    "at": 0.1,
+    "mot": "STUDIO",
+    "sous": "et je t'envoie tout"
+   },
+   "cap": "duo"
+  }
+ ]
+}

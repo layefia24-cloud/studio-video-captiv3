@@ -239,11 +239,14 @@ window.seek=async function(t){const sc=C.scenes.find(s=>t>=s.t0&&t<s.t1)||C.scen
 (async()=>{C=await (await fetch(CFG_URL)).json();W=C.width||1080;H=C.height||1920;u=W/100;const c=document.getElementById('c');c.width=W;c.height=H;x=c.getContext('2d');
  C.brand=Object.assign({primary:'#16a34a',accent:'#ffd400',dark:'#0b3d2e',light:'#f4f8f2',font:'Poppins',display:'Fraunces',handle:'@moncompte'},C.brand||{});C.captions=Object.assign({on:true,y:.72,maxWords:3},C.captions||{});C.source=Object.assign({fps:30,offset:0},C.source||{});
  if(C.words){try{WORDS=await (await fetch(/^(\/|https?:)/.test(C.words)?C.words:'/'+C.words)).json();mkGroups()}catch(e){}}
- const BUILTIN=[['Poppins','Poppins-Regular.ttf','400','normal'],['Poppins','Poppins-Medium.ttf','500','normal'],['Poppins','Poppins-Bold.ttf','700','normal'],['Poppins','Poppins-MediumItalic.ttf','500','italic'],['Poppins','Poppins-BoldItalic.ttf','700','italic'],['Fraunces','fraunces-latin-600-normal.woff2','600','normal'],['Fraunces','fraunces-latin-600-italic.woff2','600','italic']];
+ const BUILTIN=[['Poppins','Poppins-Regular.ttf','400','normal'],['Poppins','Poppins-Medium.ttf','500','normal'],['Poppins','Poppins-Bold.ttf','700','normal'],['Poppins','Poppins-MediumItalic.ttf','500','italic'],['Poppins','Poppins-BoldItalic.ttf','700','italic'],['Fraunces','fraunces-latin-600-normal.woff2','600','normal'],['Fraunces','fraunces-latin-600-italic.woff2','600','italic'],['Lora','lora-latin-400-normal.woff2','400','normal'],['Lora','lora-latin-400-italic.woff2','400','italic'],['Lora','lora-latin-500-normal.woff2','500','normal'],['Lora','lora-latin-500-italic.woff2','500','italic'],['Lora','lora-latin-600-normal.woff2','600','normal'],['Montserrat','montserrat-latin-500-normal.woff2','500','normal'],['Montserrat','montserrat-latin-600-normal.woff2','600','normal']];
  for(const [fam,file,w,stl] of BUILTIN){try{const ff=new FontFace(fam,`url(/__engine/fonts/${file})`,{weight:w,style:stl});document.fonts.add(await ff.load())}catch(e){}}
  for(const fnt of (C.fonts||[])){try{const ff=new FontFace(fnt.family,`url(${/^(\/|https?:|data:)/.test(fnt.src)?fnt.src:'/'+fnt.src})`,{weight:fnt.weight||'400',style:fnt.style||'normal'});document.fonts.add(await ff.load())}catch(e){}}
  if(window.SHORT_READY)await window.SHORT_READY;await document.fonts.ready;window.DUR=C.duration||C.scenes.at(-1).t1;window.READY=true})();
 </script>
 <script src="/__engine/short.js"></script>
 <script src="/__engine/premium.js"></script>
+<script src="/__engine/editorial.js"></script>
+<script src="/__engine/effets.js"></script>
+<script src="/__engine/effets2.js"></script>
 </body></html>

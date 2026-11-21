@@ -1,0 +1,203 @@
+{
+ "width": 1080,
+ "height": 1920,
+ "fps": 30,
+ "brand": {
+  "primary": "#FF5A3C",
+  "accent": "#FF5A3C",
+  "dark": "#15131a",
+  "light": "#F4EFE8",
+  "ink": "#1d1b20",
+  "font": "Poppins",
+  "handle": "@studio.captiv",
+  "name": "STUDIO CAPTIV"
+ },
+ "source": {
+  "frames": "work/frames",
+  "masks": "work/masks",
+  "count": 481,
+  "fps": 30
+ },
+ "words": "work/words.json",
+ "captions": {
+  "on": true
+ },
+ "reels": [
+  "img/r1.jpg",
+  "img/r2.jpg",
+  "img/r3.jpg",
+  "img/r4.jpg",
+  "img/r5.jpg",
+  "img/r6.jpg",
+  "img/r7.jpg",
+  "img/r8.jpg"
+ ],
+ "scenes": [
+  {
+   "t0": 0,
+   "t1": 2.32,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "enveloppe",
+    "at": 0.45,
+    "out": 1.95
+   }
+  },
+  {
+   "t0": 2.32,
+   "t1": 4.44,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "dossier",
+    "at": 0.02,
+    "click": 0.45,
+    "spill": 1.4,
+    "out": 1.8,
+    "label": "MES VIDÉOS"
+   }
+  },
+  {
+   "t0": 4.44,
+   "t1": 6.1,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "polaroid",
+    "at": 0.02,
+    "print": 0.7
+   }
+  },
+  {
+   "t0": 6.1,
+   "t1": 8.04,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "tapis",
+    "at": 0.35
+   }
+  },
+  {
+   "t0": 8.04,
+   "t1": 10.9,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "fichiers",
+    "at": 0.05,
+    "clicks": [
+     [
+      1.0,
+      1
+     ],
+     [
+      1.55,
+      3
+     ],
+     [
+      2.1,
+      4
+     ]
+    ]
+   }
+  },
+  {
+   "t0": 10.9,
+   "t1": 13.44,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "coffre",
+    "at": 0.1,
+    "open": 1.3,
+    "text": "UN STUDIO"
+   },
+   "bg": "creme",
+   "zoomP": 0.85
+  },
+  {
+   "t0": 13.44,
+   "t1": 16.05,
+   "type": "fx",
+   "hl": [
+    "téléphone",
+    "dossier",
+    "imprime",
+    "usine",
+    "final",
+    "secret",
+    "studio",
+    "claude",
+    "commentaire"
+   ],
+   "fx": {
+    "kind": "verre",
+    "at": 0.3,
+    "top": "STUDIO",
+    "bottom": "EN COMMENTAIRE"
+   }
+  }
+ ]
+}

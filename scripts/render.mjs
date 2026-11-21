@@ -27,7 +27,7 @@ const grab=async t=>{const d=await p.evaluate(async t=>{await window.seek(t);ret
 if(A.stills){for(const t of String(A.stills).split(','))fs.writeFileSync(`${out}_${t}.jpg`,await grab(+t));console.log('Images écrites :',out+'_*.jpg')}
 else{const D=await p.evaluate('window.DUR'),fps=cfg.fps||30,N=Math.round(D*fps);
  const args=['-loglevel','error','-y','-f','image2pipe','-framerate',String(fps),'-i','-'];if(A.audio)args.push('-i',A.audio);
- args.push('-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p');if(A.audio)args.push('-map','0:v','-map','1:a','-af','apad','-c:a','aac','-b:a','192k');args.push('-t',String(D));args.push('-movflags','+faststart',out);
+ args.push('-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-colorspace','bt709','-color_primaries','bt709','-color_trc','bt709','-color_range','tv');if(A.audio)args.push('-map','0:v','-map','1:a','-af','apad','-c:a','aac','-b:a','256k','-ar','48000');args.push('-t',String(D));args.push('-movflags','+faststart',out);
  const ff=spawn(FF,args,{stdio:['pipe','inherit','inherit']});let dead=false;const closed=new Promise(r=>ff.on('close',()=>{dead=true;r()}));ff.stdin.on('error',()=>{dead=true});
  for(let i=0;i<N&&!dead;i++){const buf=await grab(i/fps);if(!ff.stdin.write(buf))await Promise.race([new Promise(r=>ff.stdin.once('drain',r)),closed]);if(i%60==0)process.stdout.write(`\r${Math.round(i/N*100)} %`)}
  if(!dead)ff.stdin.end();await closed;console.log(`\nVidéo écrite : ${out} (${D.toFixed(1)} s)`)}

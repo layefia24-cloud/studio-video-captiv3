@@ -11,8 +11,13 @@
 - [ ] Scène de fin avec le @compte ou l'action à faire (WhatsApp, lien).
 
 ## Son
-- [ ] Voix normalisée (prepare.py le fait : -14 LUFS) ; pas de saturation.
-- [ ] Si musique : 15 à 20 dB sous la voix.
+- [ ] `audio.py` passé : -14 LUFS (réseaux) ou -16 LUFS (YouTube), crête ≤ -1 dBTP, mono et stéréo au même niveau.
+- [ ] Bruitages sur des événements visibles seulement ; aucun clic aux coupes.
+- [ ] Si musique : 20 dB sous la voix, fondu de fin de 2 s.
+
+## Contrôle automatique
+- [ ] `qa.py` : tous les ✓ (format, yuv420p + bt709, images noires ou figées, silences, volume, voix conforme au script).
+- [ ] Démo d'écran : aucun e-mail, numéro ou nom de client visible.
 
 ## Contenu
 - [ ] Orthographe et accents vérifiés (noms, prix, FCFA avec une espace : « 6 500 FCFA »).
