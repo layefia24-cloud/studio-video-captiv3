@@ -116,9 +116,11 @@ Dans les textes, `*mot*` = mot-clé coloré (en pastille sur `pub`/`tech`, en it
 `small` (« Commente »), `big` (« « MOTION » »), `sub`, `icons` (ex. « ♥ »).
 
 ## Voix IA
-`python3 scripts/tts.py script.txt` → `work/voix_ia.wav` (voix française `ff_siwis`, licence Apache 2.0), puis `python3 scripts/prepare.py work/voix_ia.wav --audio-only --words`.
+Voix OmniVoice (licence Apache 2.0, installée par `setup.sh`), en français ou en **wolof**.
+- Français : `python3 scripts/tts.py script.txt` → `work/voix_ia.wav`, puis `python3 scripts/prepare.py work/voix_ia.wav --audio-only --words`.
+- Wolof : `python3 scripts/tts.py script.txt --lang wo --words` → `work/voix_ia.wav` + `work/words.json` (temps estimés), puis `python3 scripts/prepare.py work/voix_ia.wav --audio-only` (sans `--words`).
 
-Français ou **wolof** avec OmniVoice (licence Apache 2.0, installé par `setup.sh --omni`) : `python3 scripts/tts_omni.py script.txt --lang wo --words` → `work/voix_ia.wav` + `work/words.json` (temps estimés), puis `python3 scripts/prepare.py work/voix_ia.wav --audio-only` (sans `--words`). Options : `--instruct "female, low pitch"` (voix décrite), `--seed 3` (autre voix automatique), `--ref extrait.wav --ref-text "…"` (voix clonée, avec l'accord de la personne), `--garder-voix` / `--voix` (réutiliser la voix), `--speed`, `--steps 16` (plus rapide).
+Options : `--instruct "female, low pitch"` (voix décrite), `--seed 3` (autre voix automatique), `--ref extrait.wav --ref-text "…"` (voix clonée, avec l'accord de la personne), `--garder-voix` / `--voix` (réutiliser la voix), `--speed`, `--steps 16` (plus rapide).
 
 ---
 # Format court (module short.js)
