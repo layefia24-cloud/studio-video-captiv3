@@ -29,22 +29,24 @@ Lis `references/codes.md` dès qu'un code apparaît. Il donne pour chacun des 13
 Lance `bash <studio>/scripts/setup.sh`. Il passe seulement par npm et pip, et prévoit des solutions de secours :
 - navigateur : Chrome déjà présent, sinon Chrome téléchargé, sinon Chromium livré par npm (`@sparticuz/chromium`) ;
 - ffmpeg : celui du système, sinon celui livré par pip (`imageio-ffmpeg`) ;
-- voix IA (`kokoro-onnx`) et mots minutés (`faster-whisper`), facultatifs.
+- mots minutés (`faster-whisper`) ;
+- voix IA **française et wolof** OmniVoice (`omnivoice`, PyTorch, plusieurs Go) ; `--sans-voix` la saute si l'utilisateur enregistre sa propre voix.
 Affiche à l'utilisateur les lignes ✓ / ✗ du script. Si npm ou pip sont bloqués, dis-lui d'activer l'accès réseau sortant dans les réglages de Claude (Paramètres → Capacités) puis d'ouvrir une **nouvelle** session : un réglage changé ne s'applique pas à une session déjà ouverte. Ne contourne jamais un blocage réseau.
-Le modèle de la voix IA se télécharge depuis GitHub au premier usage ; s'il est bloqué, propose à l'utilisateur d'enregistrer sa propre voix.
+Le modèle de la voix IA (~3,1 Go) se télécharge depuis huggingface.co au premier usage ; s'il est bloqué, propose à l'utilisateur d'enregistrer sa propre voix.
 
 ## 4. Fabriquer
 La chaîne complète, ses contrôles et les règles de pro (coupe, son, plans qui changent à chaque phrase, bruitages, musique, formats, pièges) : `references/montage-pro.md`. Lis-le avant ta première vidéo de la session.
 
 0. **Rush face caméra brut** (filmé au téléphone, avec hésitations) : `python3 <studio>/scripts/coupe.py rush.mp4` → montre `work/coupes.txt` et attends l'accord, puis `python3 <studio>/scripts/coupe.py rush.mp4 --fabriquer` → `work/coupe.mp4` (vérifiée image par image). La suite part de `coupe.mp4`.
-1. **Voix** : écris `voix.txt` = le hook choisi + la lock-in + le corps + la fin, sans les balises. Face caméra : c'est le texte que la personne lit en se filmant. Sinon, voix IA gratuite `python3 <studio>/scripts/tts.py voix.txt` (voix française ff_siwis ; écris les noms anglais comme ils se prononcent, par exemple « Hydra Glo », « i-bouk ») ou voix de l'utilisateur. Puis `python3 <studio>/scripts/prepare.py voix.wav --audio-only --words` → `work/voix.wav` + `work/words.json`.
+1. **Voix** : écris `voix.txt` = le hook choisi + la lock-in + le corps + la fin, sans les balises. Face caméra : c'est le texte que la personne lit en se filmant. Sinon, voix IA gratuite `python3 <studio>/scripts/tts.py voix.txt` → `work/voix_ia.wav` (OmniVoice, voix féminine française par défaut ; autre voix avec `--instruct "female, middle-aged, low pitch"` ou `--seed 7` ; écris les nombres en lettres et les noms anglais comme ils se prononcent, par exemple « Hydra Glo », « i-bouk ») ou voix de l'utilisateur. Puis `python3 <studio>/scripts/prepare.py work/voix_ia.wav --audio-only --words` → `work/voix.wav` + `work/words.json`. Fais écouter la voix avant le rendu complet ; `--garder-voix marque.pt` puis `--voix marque.pt` gardent la même voix d'une vidéo à l'autre.
+   **Wolof** : `python3 <studio>/scripts/tts.py voix.txt --lang wo --words`, puis `prepare.py work/voix_ia.wav --audio-only` **sans** `--words` : Whisper ne connaît pas le wolof, on garde le `work/words.json` estimé par `tts.py`. Sous-titres en wolof : texte du script tel quel, orthographe donnée par l'utilisateur.
 2. **Vidéo face caméra** : `python3 <studio>/scripts/prepare.py video.mp4 --words [--masks]` → images, voix, mots minutés, masques.
 3. **Sous-titres** : affiche le texte du script, pas la transcription (qui écorche les noms de marque) ; recale les mots du script sur les temps de `words.json`.
 4. **config.json** : scènes calées sur les mots, un changement visible toutes les 1,5 à 3 s. Réglages : `references/config.md` (face caméra et sans visage), `references/lookbook.md` (format court), `references/premium.md` (premium et scènes produit), `references/editorial.md` (style éditorial crème sans visage, scène `ed`), `references/effets.md` (effets derrière la personne X1–X16 et objets illustrés O1–O6, scène `fx`, avec `prepare.py --masks`). Les couleurs viennent toujours de la marque de la personne : `python3 <studio>/scripts/palette.py logo.png` donne le bloc de couleurs à mettre dans le config. Exemples : `scripts/example-config.json`, `scripts/example-sans-visage.json`, `references/exemple-premium-16x9.json`.
 5. **Contrôle** : `node <studio>/scripts/render.mjs --config config.json --stills 1,5,12 --out apercu` ; regarde chaque image (texte lisible, rien hors cadre, visage dégagé).
 6. **Son final** : `python3 <studio>/scripts/audio.py work/voix.wav --out son.wav` (-14 LUFS, crête -1 dBTP ; `--cible youtube` pour du 16:9 long). Bruitages : `python3 <studio>/scripts/sfx.py son.wav bruitages.json --out son.wav`. Musique seulement si demandée : `--musique fond.mp3` (20 dB sous la voix).
 7. **Rendu** : `node <studio>/scripts/render.mjs --config config.json --out video.mp4 --audio son.wav`.
-8. **Contrôle qualité** : `python3 <studio>/scripts/qa.py video.mp4 --format 9:16 --script script.txt`. Corrige chaque ✗ et relance avant d'envoyer : l'utilisateur ne doit juger que le goût, jamais un défaut mesurable. Puis envoie la vidéo.
+8. **Contrôle qualité** : `python3 <studio>/scripts/qa.py video.mp4 --format 9:16 --script script.txt` (`--lang wo` pour une voix en wolof). Corrige chaque ✗ et relance avant d'envoyer : l'utilisateur ne doit juger que le goût, jamais un défaut mesurable. Puis envoie la vidéo.
 
 ## 5. Selon la cible
 - Créateur ou influenceur : `references/cible-createurs.md`.

@@ -1,37 +1,111 @@
 #!/usr/bin/env python3
-"""Voix off IA gratuite (Kokoro, licence Apache 2.0) pour les vidéos sans visage.
+"""Voix off IA gratuite en français ou en wolof avec OmniVoice (k2-fsa, licence Apache 2.0, plus de 600 langues).
 
 Usage :
-  python3 tts.py texte.txt --out work/voix_ia.wav [--voice ff_siwis] [--speed 1.05] [--lang fr-fr]
-Puis :  python3 prepare.py work/voix_ia.wav --audio-only --words   (crée work/voix.wav normalisée + work/words.json)     (mots minutés pour les sous-titres)
+  python3 tts.py voix.txt                       (français, voix féminine par défaut -> work/voix_ia.wav)
+  python3 tts.py voix.txt --lang wo --words     (wolof)
+Puis :  python3 prepare.py work/voix_ia.wav --audio-only            (crée work/voix.wav normalisée)
+  - français : ajoute --words à prepare.py pour les mots minutés (faster-whisper) ;
+  - wolof : faster-whisper ne connaît pas le wolof, donc garde le work/words.json écrit ici par --words
+    (temps estimés à partir du texte, phrase par phrase).
 
-Dépendances : pip install kokoro-onnx soundfile
-Au premier lancement, les fichiers du modèle (~330 Mo) sont téléchargés dans ~/.cache/kokoro/.
-Voix françaises : ff_siwis (féminine). Voix anglaises : af_heart, am_michael, etc.
-Écris les nombres en lettres ou avec espaces (« 6 500 francs CFA ») pour une bonne prononciation.
-Une voix IA doit rester une voix générique : ne jamais imiter la voix d'une vraie personne sans son accord écrit.
+Choisir la voix (la même voix est gardée sur toutes les phrases) :
+  (rien)                         voix féminine française par défaut : "female, young adult, moderate pitch", --seed 0
+  --instruct "female, low pitch" voix décrite, attributs en anglais séparés par des virgules :
+                                 male / female ; child, teenager, young adult, middle-aged, elderly ;
+                                 very low pitch … very high pitch ; whisper. Moins stable en wolof : écoute avant de livrer.
+  --seed 7                       autre voix pour la même description
+  --ref ma_voix.wav --ref-text "texte exact dit dans l'extrait"
+                                 voix clonée depuis un extrait de 3 à 10 s, de préférence dans la même langue.
+                                 UNIQUEMENT avec l'accord de la personne dont c'est la voix.
+  --garder-voix voix_marque.pt   enregistre la voix obtenue ; --voix voix_marque.pt la réutilise sur les vidéos suivantes.
+
+Dépendances : pip install omnivoice soundfile   (installe aussi PyTorch, plusieurs Go)
+              ou :  bash setup.sh
+Au premier lancement, le modèle (~3,1 Go) est téléchargé depuis huggingface.co dans ~/.cache/huggingface/.
+Si Hugging Face est bloqué : export HF_ENDPOINT="https://hf-mirror.com", sinon voix enregistrée par l'utilisateur.
+Sans carte graphique, compte environ 5 s de calcul par seconde de voix (--steps 16 : deux fois plus rapide).
+Écris les nombres en lettres. Une voix IA doit rester générique : jamais la voix d'une vraie personne sans son accord écrit.
 """
-import argparse, os, urllib.request, re
-ap = argparse.ArgumentParser()
-ap.add_argument('texte'); ap.add_argument('--out', default='work/voix_ia.wav')
-ap.add_argument('--voice', default='ff_siwis'); ap.add_argument('--speed', type=float, default=1.05); ap.add_argument('--lang', default='fr-fr')
+import argparse, os, re, sys
+
+ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+ap.add_argument('texte', help='fichier texte (ou le texte lui-même)')
+ap.add_argument('--out', default='work/voix_ia.wav')
+ap.add_argument('--lang', default='fr', help='fr (français), wo (wolof), ou tout code pris en charge par OmniVoice')
+ap.add_argument('--instruct', default='female, young adult, moderate pitch', help='description de la voix (en anglais), ex. "male, low pitch"')
+ap.add_argument('--ref', help='extrait audio de 3 à 10 s à cloner (avec accord de la personne)')
+ap.add_argument('--ref-text', help="texte exact dit dans l'extrait --ref")
+ap.add_argument('--voix', help='voix enregistrée avec --garder-voix (.pt)')
+ap.add_argument('--garder-voix', help='enregistre la voix utilisée dans ce fichier .pt')
+ap.add_argument('--speed', type=float, default=1.0, help='> 1 plus rapide, < 1 plus lent')
 ap.add_argument('--pause', type=float, default=0.25, help='silence entre les phrases (s)')
+ap.add_argument('--steps', type=int, default=32, help='étapes de calcul (16 = deux fois plus rapide, un peu moins net)')
+ap.add_argument('--seed', type=int, default=0, help='change la voix choisie automatiquement')
+ap.add_argument('--words', action='store_true', help='écrit aussi words.json (temps des mots estimés) à côté de --out')
+ap.add_argument('--model', default='k2-fsa/OmniVoice')
 a = ap.parse_args()
-cache = os.path.expanduser('~/.cache/kokoro'); os.makedirs(cache, exist_ok=True)
-base = 'https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/'
-for f in ['kokoro-v1.0.onnx', 'voices-v1.0.bin']:
-    p = os.path.join(cache, f)
-    if not os.path.exists(p):
-        print('Téléchargement de', f, '…'); urllib.request.urlretrieve(base + f, p)
-from kokoro_onnx import Kokoro
-import soundfile as sf, numpy as np
-k = Kokoro(os.path.join(cache, 'kokoro-v1.0.onnx'), os.path.join(cache, 'voices-v1.0.bin'))
-txt = open(a.texte, encoding='utf-8').read().strip() if os.path.exists(a.texte) else a.texte
+if a.ref and not a.ref_text:
+    sys.exit("--ref demande --ref-text (le texte exact dit dans l'extrait)")
+
+txt = open(a.texte, encoding='utf-8').read().strip() if os.path.exists(a.texte) else a.texte.strip()
 parts = [p.strip() for p in re.split(r'(?<=[.!?…])\s+|\n+', txt) if p.strip()]
-out, sr = [], 24000
-for p in parts:
-    s, sr = k.create(p, voice=a.voice, speed=a.speed, lang=a.lang)
-    out.append(s); out.append(np.zeros(int(sr * a.pause), dtype=s.dtype))
+if not parts:
+    sys.exit('texte vide')
+
+try:
+    import numpy as np, soundfile as sf, torch
+    from omnivoice import OmniVoice, VoiceClonePrompt
+except ImportError:
+    sys.exit('OmniVoice absent : lance  bash setup.sh  (ou pip install omnivoice soundfile)')
+
+if torch.cuda.is_available(): dev, dt = 'cuda:0', torch.float16
+elif getattr(torch.backends, 'mps', None) and torch.backends.mps.is_available(): dev, dt = 'mps', torch.float16
+else: dev, dt = 'cpu', torch.float32
+torch.manual_seed(a.seed); np.random.seed(a.seed)
+print(f'Chargement du modèle OmniVoice ({dev})…', flush=True)
+m = OmniVoice.from_pretrained(a.model, device_map=dev, dtype=dt)
+sr = m.sampling_rate
+opts = dict(language=a.lang, speed=a.speed, num_step=a.steps)
+
+# Voix : enregistrée, clonée, ou fixée à partir de la première phrase pour rester identique sur toute la vidéo.
+prompt, out, first = None, [], None
+if a.voix:
+    prompt = VoiceClonePrompt.load(a.voix)
+elif a.ref:
+    prompt = m.create_voice_clone_prompt(ref_audio=a.ref, ref_text=a.ref_text)
+else:
+    print(f'[1/{len(parts)}]', parts[0], flush=True)
+    first = m.generate(text=parts[0], instruct=a.instruct, **opts)[0]
+    prompt = m.create_voice_clone_prompt(ref_audio=(torch.from_numpy(first), sr), ref_text=parts[0])
+if a.garder_voix:
+    prompt.save(a.garder_voix); print('Voix enregistrée :', a.garder_voix)
+
+segs, t = [], 0.0
+for i, p in enumerate(parts):
+    if i == 0 and first is not None:
+        s = first
+    else:
+        print(f'[{i + 1}/{len(parts)}]', p, flush=True)
+        s = m.generate(text=p, voice_clone_prompt=prompt, **opts)[0]
+    s = np.asarray(s, dtype=np.float32)
+    segs.append((p, t, t + len(s) / sr)); t += len(s) / sr + a.pause
+    out += [s, np.zeros(int(sr * a.pause), dtype=np.float32)]
+
 os.makedirs(os.path.dirname(a.out) or '.', exist_ok=True)
 sf.write(a.out, np.concatenate(out), sr)
-print('Voix écrite :', a.out, f'({sum(len(x) for x in out)/sr:.1f} s)')
+print('Voix écrite :', a.out, f'({t:.1f} s, langue {a.lang})')
+
+if a.words:
+    # Temps des mots estimés : chaque phrase est répartie selon la longueur des mots (le début et la fin de phrase sont exacts).
+    W = []
+    for p, t0, t1 in segs:
+        ws = p.split(); pad = min(0.12, (t1 - t0) * 0.05)
+        a0, a1 = t0 + pad, t1 - pad; tot = sum(len(w) + 1 for w in ws); c = a0
+        for w in ws:
+            d = (a1 - a0) * (len(w) + 1) / tot
+            W.append([w, round(c, 2), round(c + d, 2)]); c += d
+    import json
+    wp = os.path.join(os.path.dirname(a.out) or '.', 'words.json')
+    json.dump(W, open(wp, 'w'), ensure_ascii=False)
+    print('mots :', len(W), '->', wp)

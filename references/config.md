@@ -116,7 +116,9 @@ Dans les textes, `*mot*` = mot-clé coloré (en pastille sur `pub`/`tech`, en it
 `small` (« Commente »), `big` (« « MOTION » »), `sub`, `icons` (ex. « ♥ »).
 
 ## Voix IA
-`python3 scripts/tts.py script.txt` → `work/voix_ia.wav` (voix française `ff_siwis`, licence Apache 2.0), puis `python3 scripts/prepare.py work/voix_ia.wav --audio-only --words`.
+`python3 scripts/tts.py script.txt` → `work/voix_ia.wav` (OmniVoice, licence Apache 2.0, voix féminine française par défaut), puis `python3 scripts/prepare.py work/voix_ia.wav --audio-only --words`.
+
+Wolof : `python3 scripts/tts.py script.txt --lang wo --words` → `work/voix_ia.wav` + `work/words.json` (temps estimés), puis `python3 scripts/prepare.py work/voix_ia.wav --audio-only` (sans `--words`). Options : `--instruct "female, middle-aged, low pitch"` (voix décrite : male/female ; child, teenager, young adult, middle-aged, elderly ; very low … very high pitch ; whisper), `--seed 7` (autre voix pour la même description), `--ref extrait.wav --ref-text "…"` (voix clonée, avec l'accord de la personne), `--garder-voix` / `--voix` (réutiliser la voix), `--speed`, `--steps 16` (deux fois plus rapide).
 
 ---
 # Format court (module short.js)
