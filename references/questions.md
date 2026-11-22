@@ -30,7 +30,7 @@ Après la réponse, propose **3 options de style adaptées** (la recommandée en
 | 3 | Quelle durée ? | 15–20 s · 30–45 s ★ · 60 s et plus |
 | 4 | Avec ou sans visage ? | Face caméra (vidéo fournie) · Sans visage, motion design ★ · Mélange |
 | 5 | Quel but ? | Éduquer puis présenter l'offre ★ · Vendre directement · Faire connaître |
-| 6 | Quelle voix ? | Voix IA gratuite en français ★ · Voix IA en wolof · Ma voix enregistrée · Sans voix (texte) |
+| 6 | Quelle voix ? | Voix IA gratuite ★ · Ma voix enregistrée · Sans voix (texte) |
 | 7 | Quel style ? (montre les vignettes) | 3 styles du look book adaptés au sujet, avec leur code |
 | 8 | Quel appel à l'action ? | Mot-clé en commentaire ★ · Lien en bio · Message WhatsApp |
 | 8 bis | Quelles couleurs ? | Celles de mon logo ★ (tirées avec `palette.py`) · Je donne mes codes couleur · Celles du style |

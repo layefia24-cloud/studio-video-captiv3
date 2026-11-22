@@ -187,3 +187,19 @@ Codes : `SS · <exemple>`, par exemple `SS · ai-chat`. Stageshow (MIT) est un p
 | SS · bento, staggered-bento, hero-grid | Une grille de fonctions | `bento` |
 
 Les fausses interfaces servent à expliquer, jamais à tromper : pas de faux paiements, avis ou soldes présentés comme réels.
+
+## N · La liste animée sans visage (nouvelle famille, rendu à venir)
+
+Fond noir avec sol quadrillé, barre de progression segmentée en couleurs (un segment par point), pastille numérotée, sur-titre en petites capitales, titre avec mot-clé dans une étiquette blanche, carte sombre centrale où un schéma se construit sur la voix, grand numéro pâle dans le coin de la carte, sous-titres mot par mot surlignés, mascotte Capi en bas. Un point toutes les 8 à 10 s.
+
+| Code | Look | Quand l'utiliser |
+|---|---|---|
+| N1 | Intro : titre + roue de pastilles numérotées autour de Capi | Annoncer « les 7 types de… » |
+| N2 | Point numéroté + barre de progression | Chaque point d'une liste |
+| N3 | Nœuds reliés (action → outil → services) | Montrer comment un outil se connecte |
+| N4 | Chaîne de relais A → B → C | Étapes qui se passent le relais |
+| N5 | Barres en parallèle | Plusieurs choses en même temps |
+| N6 | Aiguillage : une route qui se sépare | Trier, orienter selon le cas |
+| N7 | Brouillon + feu rouge / vert | Validation avant envoi |
+| N8 | Chef + sous-tâches | Hiérarchie, délégation |
+| N9 | Couverture du guide + téléphone avec mot-clé | Fin qui collecte des contacts |

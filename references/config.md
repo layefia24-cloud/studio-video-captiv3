@@ -118,8 +118,6 @@ Dans les textes, `*mot*` = mot-clé coloré (en pastille sur `pub`/`tech`, en it
 ## Voix IA
 `python3 scripts/tts.py script.txt` → `work/voix_ia.wav` (voix française `ff_siwis`, licence Apache 2.0), puis `python3 scripts/prepare.py work/voix_ia.wav --audio-only --words`.
 
-Français ou **wolof** avec OmniVoice (licence Apache 2.0, installé par `setup.sh --omni`) : `python3 scripts/tts_omni.py script.txt --lang wo --words` → `work/voix_ia.wav` + `work/words.json` (temps estimés), puis `python3 scripts/prepare.py work/voix_ia.wav --audio-only` (sans `--words`). Options : `--instruct "female, low pitch"` (voix décrite), `--seed 3` (autre voix automatique), `--ref extrait.wav --ref-text "…"` (voix clonée, avec l'accord de la personne), `--garder-voix` / `--voix` (réutiliser la voix), `--speed`, `--steps 16` (plus rapide).
-
 ---
 # Format court (module short.js)
 Scènes `short`, `stage`, `post`, `timeline`, `annot`, `profile`, cartes `ui`, sous-titres `"style":"mix"`, looks `studio` / `green` / `violet`, transitions `fx`/`out` `"blur"` : voir `lookbook.md`.

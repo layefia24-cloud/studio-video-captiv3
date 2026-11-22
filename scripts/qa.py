@@ -14,7 +14,6 @@ from audio import FF, CIBLES, mesure
 
 ap = argparse.ArgumentParser(); ap.add_argument('video'); ap.add_argument('--format', default='')
 ap.add_argument('--cible', default='reseaux', choices=CIBLES); ap.add_argument('--script')
-ap.add_argument('--lang', default='fr', help='langue de la voix (fr, en… ; wo = wolof : contrôle voix/script sauté)')
 ap.add_argument('--fige', type=float, default=4.0, help='durée max sans aucun mouvement (s)')
 a = ap.parse_args()
 res = []
@@ -51,14 +50,12 @@ else:
     sil = [s for s in sil if 0.5 < s < dur - 2.5]
     ok(not sil, "aucun silence de plus de 1,6 s" + ('' if not sil else ' : à ' + ', '.join(f'{s:.1f} s' for s in sil)))
 
-if a.script and has_a and a.lang in ('wo', 'wof'):
-    print('· voix en wolof : contrôle voix/script sauté (Whisper ne connaît pas le wolof), écoute la voix en entier')
-elif a.script and has_a:
+if a.script and has_a:
     try:
         import numpy as np
         from faster_whisper import WhisperModel
         raw = subprocess.run([FF, '-v', 'error', '-i', a.video, '-vn', '-f', 'f32le', '-ac', '1', '-ar', '16000', '-'], capture_output=True).stdout
-        seg, _ = WhisperModel('small', device='cpu', compute_type='int8').transcribe(np.frombuffer(raw, np.float32), language=a.lang)
+        seg, _ = WhisperModel('small', device='cpu', compute_type='int8').transcribe(np.frombuffer(raw, np.float32), language='fr')
         n = lambda t: re.findall(r"[a-z0-9]+", ''.join(c for c in unicodedata.normalize('NFD', t.lower()) if unicodedata.category(c) != 'Mn'))
         heard, want = n(' '.join(s.text for s in seg)), n(open(a.script).read())
         import difflib
