@@ -35,6 +35,8 @@ Affiche à l'utilisateur les lignes ✓ / ✗ du script. Si npm ou pip sont bloq
 Le modèle de la voix IA (~3,1 Go) se télécharge depuis huggingface.co au premier usage : dans Claude, l'accès réseau doit autoriser `huggingface.co` et `*.hf.co` (ou tous les domaines), dans Paramètres → Capacités, puis une **nouvelle** session. S'il reste bloqué, propose à l'utilisateur d'enregistrer sa propre voix.
 
 ## 4. Fabriquer
+**Vidéo d'inspiration à refaire** (« refais les mêmes animations que cette vidéo sur ma vidéo brute ») : suis `references/remake.md`. L'analyse se fait image par image avec reanimate (`outils/reanimate/`), puis la scène `remake` (`scripts/remake.js`) rejoue chaque animation calée sur les mots de l'utilisateur, avec ses images et sa marque, et on vérifie côte à côte avec l'inspiration.
+
 La chaîne complète, ses contrôles et les règles de pro (coupe, son, plans qui changent à chaque phrase, bruitages, musique, formats, pièges) : `references/montage-pro.md`. Lis-le avant ta première vidéo de la session.
 
 0. **Rush face caméra brut** (filmé au téléphone, avec hésitations) : `python3 <studio>/scripts/coupe.py rush.mp4` → montre `work/coupes.txt` et attends l'accord, puis `python3 <studio>/scripts/coupe.py rush.mp4 --fabriquer` → `work/coupe.mp4` (vérifiée image par image). La suite part de `coupe.mp4`.
@@ -68,4 +70,4 @@ Styles étudiés : `references/styles.md` (face caméra), `references/styles-san
 Avant de livrer : `references/checklist.md`.
 
 ## Outils complémentaires
-Voir `outils/OUTILS.md` : ffmpeg et Whisper (faster-whisper) sont déjà dans le studio ; le pack video-agent-skills (MIT) est inclus dans `outils/video-agent-skills/` pour le look écran partagé papier, la coupe ultra serrée, les clips et le B-roll ; Treg reste optionnel (compte payant, à connecter par l'utilisateur). Nouvelle famille N (liste animée sans visage) : voir `references/codes.md`.
+Voir `outils/OUTILS.md` : ffmpeg et Whisper (faster-whisper) sont déjà dans le studio ; le pack video-agent-skills (MIT) est inclus dans `outils/video-agent-skills/` pour le look écran partagé papier, la coupe ultra serrée, les clips et le B-roll ; Treg reste optionnel (compte payant, à connecter par l'utilisateur). Nouvelle famille N (liste animée sans visage) : voir `references/codes.md`. **reanimate** (MIT) est inclus dans `outils/reanimate/` pour analyser et vérifier image par image une vidéo d'inspiration (voir `references/remake.md`).
