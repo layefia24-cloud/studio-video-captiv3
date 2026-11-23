@@ -32,6 +32,7 @@ Après la réponse, propose **3 options de style adaptées** (la recommandée en
 | 5 | Quel but ? | Éduquer puis présenter l'offre ★ · Vendre directement · Faire connaître |
 | 6 | Quelle voix ? | Voix IA féminine ★ · Voix IA masculine · Ma voix enregistrée · Sans voix (texte) |
 | 6 bis | Quelle voix IA ? (après le script, voir `SKILL.md` § 4, étape 1) | Les 6 échantillons de `tts.py --catalogue`, à écouter, ta recommandation en premier |
+| 6 ter | Vidéo d'inspiration envoyée : que garder ? | S'inspirer du style et l'adapter à ma marque ★ · Copier fidèlement les animations |
 | 7 | Quel style ? (montre les vignettes) | 3 styles du look book adaptés au sujet, avec leur code |
 | 8 | Quel appel à l'action ? | Mot-clé en commentaire ★ · Lien en bio · Message WhatsApp |
 | 8 bis | Quelles couleurs ? | Celles de mon logo ★ (tirées avec `palette.py`) · Je donne mes codes couleur · Celles du style |

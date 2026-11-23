@@ -35,7 +35,7 @@ Affiche à l'utilisateur les lignes ✓ / ✗ du script. Si npm ou pip sont bloq
 Le modèle de la voix IA (~3,1 Go) se télécharge depuis huggingface.co au premier usage : dans Claude, l'accès réseau doit autoriser `huggingface.co` et `*.hf.co` (ou tous les domaines), dans Paramètres → Capacités, puis une **nouvelle** session. S'il reste bloqué, propose à l'utilisateur d'enregistrer sa propre voix.
 
 ## 4. Fabriquer
-**Vidéo d'inspiration à refaire** (« refais les mêmes animations que cette vidéo sur ma vidéo brute ») : suis `references/remake.md`. L'analyse se fait image par image avec reanimate (`outils/reanimate/`), puis la scène `remake` (`scripts/remake.js`) rejoue chaque animation calée sur les mots de l'utilisateur, avec ses images et sa marque, et on vérifie côte à côte avec l'inspiration.
+**Vidéo d'inspiration** (« je veux ce style de montage pour ma vidéo ») : suis `references/remake.md`. Par défaut, on **s'inspire** : on tire la recette de style (rythme, typo, effets signature) avec reanimate (`outils/reanimate/`), puis la scène `remake` (`scripts/remake.js`) la rejoue sur les mots de l'utilisateur, à ses couleurs (`palette.py` → `colors`), avec des effets choisis pour sa niche et ses propres images. La copie fidèle des animations reste possible s'il la demande. On vérifie toujours côte à côte avec l'inspiration.
 
 La chaîne complète, ses contrôles et les règles de pro (coupe, son, plans qui changent à chaque phrase, bruitages, musique, formats, pièges) : `references/montage-pro.md`. Lis-le avant ta première vidéo de la session.
 

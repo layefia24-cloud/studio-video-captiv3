@@ -3,8 +3,9 @@
 
 Usage :
   python3 palette.py logo.png [autre_image.jpg …]
-Affiche le bloc à coller dans config.json :
+Affiche les blocs à coller dans config.json :
   "ed": {"primary": "#…", "secondary": "#…"}
+  "colors": {"chaud": "#…", "duo": ["#…", "#…"], "froid": "#…"}   (scène remake)
 puis l'aperçu des teintes dérivées. Si l'utilisateur donne ses couleurs (codes hex), utilise-les
 directement à la place : elles priment toujours sur l'extraction.
 """
@@ -58,3 +59,20 @@ if __name__ == '__main__':
     if s:
         block['secondary'] = s
     print(json.dumps({'ed': block}, ensure_ascii=False))
+    # Bloc pour la scène "remake" : couleur chaude (lueur, mot fort), froide (glacé, vague, compteur) et duo.
+    hue = lambda h: colorsys.rgb_to_hls(*[int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)])
+    def vive(h, l=.55, s=.85):
+        hh, _, ss = hue(h)
+        r, g, b = colorsys.hls_to_rgb(hh, l, max(ss, s))
+        return '#%02X%02X%02X' % (round(r * 255), round(g * 255), round(b * 255))
+    cols = [c for c in [p, s] if c]
+    chaud = next((c for c in cols if hue(c)[0] < .17 or hue(c)[0] > .85), None)
+    froid = next((c for c in cols if .4 < hue(c)[0] < .75), None)
+    if not chaud:
+        chaud = '#FF6A1F'
+    if not froid:
+        h = (hue(chaud)[0] + .5) % 1
+        r, g, b_ = colorsys.hls_to_rgb(h, .55, .8)
+        froid = '#%02X%02X%02X' % (round(r * 255), round(g * 255), round(b_ * 255))
+    chaud, froid = vive(chaud), vive(froid)
+    print(json.dumps({'colors': {'chaud': chaud, 'duo': [froid, chaud], 'froid': froid}}, ensure_ascii=False))

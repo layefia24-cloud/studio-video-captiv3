@@ -1,6 +1,16 @@
-# Refaire les animations d'une vidéo d'inspiration (remake)
+# S'inspirer d'un style de montage (remake)
 
-L'utilisateur envoie une **vidéo d'inspiration** (le montage qu'il aime) et **sa vidéo brute** (face caméra). Le but : reproduire les mêmes animations, au même rythme, sur ses mots à lui, avec son contenu (ses images, sa marque). On copie le **mouvement** (ordre, timing, entrées et sorties, place à l'écran, devant ou derrière la personne), jamais la marque, le logo ou le visage de quelqu'un d'autre.
+L'utilisateur envoie une **vidéo d'inspiration** (un montage qu'il aime) et **sa vidéo brute** (face caméra). On en tire la **recette de style** (rythme, types d'animations, typographie, place à l'écran, devant ou derrière la personne) et on la rejoue **à sa façon** : ses couleurs, sa niche, ses images, sa marque, sur ses mots. On ne copie jamais la marque, le logo, les images ou le visage de quelqu'un d'autre.
+
+## Deux façons de faire (question du formulaire)
+| Mode | Ce qu'on garde de l'inspiration | Ce qui vient de l'utilisateur |
+|---|---|---|
+| **S'inspirer et personnaliser** ★ (par défaut) | le rythme (un changement toutes les 1 à 2 s), la typo (fin + gras italique), la famille d'animations et leur place | ses couleurs (`palette.py` → `colors`), des effets choisis pour sa niche, ses images, ses chiffres réels, son logo |
+| **Copie fidèle du mouvement** | chaque animation, dans le même ordre et au même endroit | seulement les mots, les images et la marque |
+
+Pour « s'inspirer », écris d'abord la **recette** en 5 lignes dans `style.md` (rythme, typo, 3 à 5 effets signature, ambiance, fin), puis choisis pour chaque phrase l'effet qui **sert son propos dans sa niche** : un arc de ses produits plutôt que des drapeaux pour une boutique, une icône hologramme qui parle de son métier, ses vrais chiffres dans le compteur. Un effet de l'inspiration qui n'a pas de sens pour sa niche se remplace par un code du look book (`references/effets.md`). Garde `style.md` : l'utilisateur pourra réutiliser sa recette sur toutes ses vidéos (« même style que la dernière fois »).
+
+Couleurs : `python3 <studio>/scripts/palette.py logo.png` affiche le bloc `"colors"` à mettre dans la scène (`chaud` = lueur et mot fort, `froid` = mot glacé, points d'interrogation, hologramme, compteur, vague, `duo` = mot en deux couleurs). Les couleurs données par l'utilisateur priment toujours. Sans logo, demande-les dans le formulaire.
 
 Outil d'analyse : **reanimate** (`outils/reanimate/`, licence MIT). Moteur : la scène `"type":"remake"` (`scripts/remake.js`).
 
@@ -35,18 +45,20 @@ python3 <studio>/scripts/prepare.py brute.mp4 --duration <fin utile> --masks --w
 Coupe la fin parasite (écran CapCut, noir). Les masques permettent de passer un calque **derrière** la personne. Vérifie `work/words.json` : un mot mal transcrit (« d'en » pour « dans ») se corrige à la main.
 
 ## 4. Associer chaque animation à un mot
-Garde l'ordre et la durée de l'inspiration, mais cale chaque calque sur **le mot de l'utilisateur** qui joue le même rôle : le hook sur le hook, le chiffre sur le chiffre, l'appel à l'action sur l'appel à l'action. Remplace les visuels par les siens : ses photos dans la carte vidéo, l'arc et le carrousel ; ses noms de fichiers ou ses chiffres réels dans les étiquettes ; sa marque dans le logo.
+En mode « s'inspirer », garde le rythme et la famille d'effets mais choisis l'effet de chaque phrase pour la niche (voir plus haut). En mode « copie fidèle », garde l'ordre et la durée de l'inspiration, mais cale chaque calque sur **le mot de l'utilisateur** qui joue le même rôle : le hook sur le hook, le chiffre sur le chiffre, l'appel à l'action sur l'appel à l'action. Remplace les visuels par les siens : ses photos dans la carte vidéo, l'arc et le carrousel ; ses noms de fichiers ou ses chiffres réels dans les étiquettes ; sa marque dans le logo.
 
 Écris un petit script Python qui lit `work/words.json` et génère `config.json` (exemple complet : `references/exemple-remake.py`).
 
 ## 5. La scène `remake`
 ```json
 {"t0":0,"t1":16,"type":"remake","fy":0.45,"zoomY":0.33,"textScale":1.25,
+ "colors":{"chaud":"#E8A83A","duo":["#1FA3B5","#E8A83A"],"froid":"#1FA3B5"},
  "zoom":[[0,1],[2.4,1.07],[4.6,1]],
  "grade":{"warm":0.55,"bottom":0.92,"from":0.6},
  "logo":{"text":"STUDIO","sub":"C A P T I V","y":0.865},
  "layers":[{"kind":"text","text":"téléphone","at":1.5,"out":2.5,"style":"glow","y":0.615}]}
 ```
+- `colors` : couleurs de la marque (sortie de `palette.py`) ; sans ce bloc, orange, bleu ciel et bleu → magenta de l'exemple.
 - `zoom` : sauts de cadrage `[temps, zoom]` (coupes nettes, comme un changement de plan).
 - `grade.warm` : ambiance chaude en haut ; `grade.bottom` : dégradé noir en bas (sous le logo).
 - `logo` : `text` + `sub`, ou `src` (PNG de la marque).
