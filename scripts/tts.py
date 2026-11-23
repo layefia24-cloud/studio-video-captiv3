@@ -9,7 +9,13 @@ Puis :  python3 prepare.py work/voix_ia.wav --audio-only            (crée work/
   - wolof : faster-whisper ne connaît pas le wolof, donc garde le work/words.json écrit ici par --words
     (temps estimés à partir du texte, phrase par phrase).
 
-Choisir la voix (la même voix est gardée sur toutes les phrases) :
+Faire choisir la voix à l'utilisateur (6 échantillons sur le début de SON texte, ~2 à 3 min sans carte graphique) :
+  python3 tts.py voix.txt --catalogue femme      (ou homme)  -> voix/01_….wav + voix/01_….pt, etc.
+  Fais écouter les .wav, l'utilisateur choisit un numéro, puis :
+  python3 tts.py voix.txt --voix voix/03_….pt    -> toute la voix off avec exactement la voix choisie.
+  Garde le .pt choisi : la même voix resservira pour toutes ses vidéos.
+
+Choisir la voix soi-même (la même voix est gardée sur toutes les phrases) :
   (rien)                         voix féminine française par défaut : "female, young adult, moderate pitch", --seed 0
   --instruct "female, low pitch" voix décrite, attributs en anglais séparés par des virgules :
                                  male / female ; child, teenager, young adult, middle-aged, elderly ;
@@ -43,6 +49,7 @@ ap.add_argument('--pause', type=float, default=0.25, help='silence entre les phr
 ap.add_argument('--steps', type=int, default=32, help='étapes de calcul (16 = deux fois plus rapide, un peu moins net)')
 ap.add_argument('--seed', type=int, default=0, help='change la voix choisie automatiquement')
 ap.add_argument('--words', action='store_true', help='écrit aussi words.json (temps des mots estimés) à côté de --out')
+ap.add_argument('--catalogue', choices=['femme', 'homme'], help='écrit 6 échantillons de voix dans --out (dossier, par défaut voix/) pour faire choisir')
 ap.add_argument('--model', default='k2-fsa/OmniVoice')
 a = ap.parse_args()
 if a.ref and not a.ref_text:
@@ -67,6 +74,49 @@ print(f'Chargement du modèle OmniVoice ({dev})…', flush=True)
 m = OmniVoice.from_pretrained(a.model, device_map=dev, dtype=dt)
 sr = m.sampling_rate
 opts = dict(language=a.lang, speed=a.speed, num_step=a.steps)
+
+CATALOGUE = {
+    'femme': [('01_jeune_moyenne', 'female, young adult, moderate pitch', 0),
+              ('02_jeune_aigue', 'female, young adult, high pitch', 0),
+              ('03_jeune_grave', 'female, young adult, low pitch', 0),
+              ('04_adulte_moyenne', 'female, middle-aged, moderate pitch', 0),
+              ('05_adulte_grave', 'female, middle-aged, low pitch', 0),
+              ('06_jeune_moyenne_bis', 'female, young adult, moderate pitch', 7)],
+    'homme': [('01_jeune_moyenne', 'male, young adult, moderate pitch', 0),
+              ('02_jeune_grave', 'male, young adult, low pitch', 0),
+              ('03_adulte_moyenne', 'male, middle-aged, moderate pitch', 1),
+              ('04_adulte_grave', 'male, middle-aged, very low pitch', 0),
+              ('05_senior', 'male, elderly, moderate pitch', 0),
+              ('06_jeune_moyenne_bis', 'male, young adult, moderate pitch', 3)],
+}
+if a.catalogue:
+    # Échantillon = début du texte de l'utilisateur (1 à 2 phrases, 25 mots au plus).
+    ech, n = [], 0
+    for p in parts:
+        if ech and n + len(p.split()) > 25: break
+        ech.append(p); n += len(p.split())
+    ech = ' '.join(ech)
+    d = a.out if a.out != 'work/voix_ia.wav' else 'voix'
+    os.makedirs(d, exist_ok=True)
+    def voisee(x):
+        # Part du temps où la voix est « parlée » (pas chuchotée) : un tirage raté tombe sous 40 %.
+        try:
+            import librosa
+            y = librosa.resample(x, orig_sr=sr, target_sr=16000)
+            return float(librosa.pyin(y, fmin=60, fmax=600, sr=16000)[1].mean())
+        except Exception:
+            return 1.0
+    for nom, ins, seed in CATALOGUE[a.catalogue]:
+        print('Échantillon', nom, '…', flush=True)
+        for essai in range(3):
+            torch.manual_seed(seed + 10 * essai); np.random.seed(seed + 10 * essai)
+            s = np.asarray(m.generate(text=ech, instruct=ins, **opts)[0], dtype=np.float32)
+            if voisee(s) >= 0.4: break
+            print('  voix chuchotée, nouvel essai', flush=True)
+        sf.write(os.path.join(d, nom + '.wav'), np.asarray(s, dtype=np.float32), sr)
+        m.create_voice_clone_prompt(ref_audio=(torch.from_numpy(np.asarray(s, dtype=np.float32)), sr), ref_text=ech).save(os.path.join(d, nom + '.pt'))
+    print(f'{len(CATALOGUE[a.catalogue])} voix dans {d}/ : fais écouter les .wav, puis  tts.py <texte> --voix {d}/<numéro choisi>.pt')
+    sys.exit(0)
 
 # Voix : enregistrée, clonée, ou fixée à partir de la première phrase pour rester identique sur toute la vidéo.
 prompt, out, first = None, [], None
